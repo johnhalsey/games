@@ -13,12 +13,11 @@
 			</ul>
 		</div>
 		<div class="grow">
-			<div class="grid h-full"
+			<div class="grid h-full grid-cols-2 grid-rows-2"
 					 :class="containerClasses">
 				<div v-for="index in segments"
 						 :key="'segment-' + index"
 						 :class="`bg-${colours[index -1]}-500`">
-			{{ index }}
 				</div>
 			</div>
 		</div>
@@ -35,18 +34,19 @@ export default {
 			difficulties: [
 				{label: 'Easy', segments: 4},
 				{label: 'Medium', segments: 6},
-				{label: 'Hard', segments: 8},
+				{label: 'Hard', segments: 9},
 			],
 			currentDifficulty: 'Easy',
 			colours: [
+				'green',
+				'blue',
+				'orange',
 				'yellow',
 				'purple',
 				'pink',
-				'green',
-				'blue',
-				'lime',
 				'red',
-				'amber'
+				'lime',
+				'cyan'
 			]
 		}
 	},
@@ -55,10 +55,21 @@ export default {
 			return this.difficulties.find(difficulty => difficulty.label === this.currentDifficulty).segments;
 		},
 		containerClasses () {
-			return 'grid-cols-' + this.cols + ' grid-rows-' + this.cols;
+			return 'grid-cols-' + this.cols + ' grid-rows-' + this.rows;
 		},
 		cols () {
-			return this.segments / 2;
+			let cols = 2
+			// cols = this.currentDifficulty === 'Easy' ? 2 : cols
+			// cols = this.currentDifficulty === 'Medi' ? 3 : cols
+			cols = this.currentDifficulty === 'Hard' ? 3 : cols
+			return cols
+		},
+		rows () {
+			let rows = 2
+			// cols = this.currentDifficulty === 'Easy' ? 2 : cols
+			rows = this.currentDifficulty === 'Medium' ? 3 : rows
+			rows = this.currentDifficulty === 'Hard' ? 3 : rows
+			return rows
 		}
 	},
 	methods: {
@@ -76,4 +87,5 @@ body,
 #__nuxt {
 	@apply h-full;
 }
+
 </style>
