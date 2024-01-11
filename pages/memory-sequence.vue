@@ -47,7 +47,8 @@ export default {
 				'red',
 				'lime',
 				'cyan'
-			]
+			],
+			sequence: []
 		}
 	},
 	computed: {
@@ -74,7 +75,16 @@ export default {
 	},
 	methods: {
 		startGame () {
-			console.log("start game");
+			this.sequence = []
+			this.nextTurn()
+		},
+		nextTurn () {
+			const segments = this.difficulties.find(difficulty => difficulty.label === this.currentDifficulty).segments;
+			const index = this.randomIntFromInterval(0, segments - 1)
+			this.sequence.push(index)
+		},
+		randomIntFromInterval (min, max) { // min and max included
+			return Math.floor(Math.random() * (max - min + 1) + min)
 		}
 	}
 
