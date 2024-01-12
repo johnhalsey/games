@@ -17,7 +17,7 @@
 					 :class="containerClasses">
 				<div v-for="index in segments"
 						 :key="'segment-' + index"
-						 :class="`bg-${colours[index -1]}-500`">
+						 :class="[`bg-${colours[index -1]}-500`, ]">
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,8 @@ export default {
 				'lime',
 				'cyan'
 			],
-			sequence: []
+			sequence: [],
+			activeSegment: null
 		}
 	},
 	computed: {
@@ -82,9 +83,23 @@ export default {
 			const segments = this.difficulties.find(difficulty => difficulty.label === this.currentDifficulty).segments;
 			const index = this.randomIntFromInterval(0, segments - 1)
 			this.sequence.push(index)
+			this.play()
 		},
 		randomIntFromInterval (min, max) { // min and max included
 			return Math.floor(Math.random() * (max - min + 1) + min)
+		},
+		play () {
+			this.sequence.forEach((index) => {
+				setTimeout(() => {
+					this.highlight(index)
+				}, (index + 1) * 1000)
+			})
+		},
+		highlight (index) {
+			this.activeSegment = index
+			setTimeout(() => {
+				this.activeSegment = null
+			}, 500)
 		}
 	}
 
