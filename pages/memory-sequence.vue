@@ -15,18 +15,26 @@
 		<div class="grow">
 			<div class="grid h-full grid-cols-2 grid-rows-2"
 					 :class="containerClasses">
-				<div v-for="index in segments"
-						 :key="'segment-' + index"
-						 :class="[`bg-${colours[index -1]}-500`, ]">
-				</div>
+					<memory-game-segment v-for="index in segments"
+															 :key="'segment-' + index"
+															 :colour="colours[index -1]"
+															 :active="activeSegment === index -1">
+
+					</memory-game-segment>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+
+import MemoryGameSegment from '~/components/MemoryGame/segment.vue'
+
 export default {
 	name: "memory-sequence.vue",
+ 	components: {
+		MemoryGameSegment
+	},
 	data () {
 		return {
 			highScore: 0,
@@ -75,6 +83,7 @@ export default {
 		}
 	},
 	methods: {
+
 		startGame () {
 			this.sequence = []
 			this.nextTurn()
