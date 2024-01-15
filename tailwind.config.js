@@ -8,7 +8,7 @@ module.exports = {
 		'./pages/*.{js,jsx,ts,tsx,vue}',
 	],
 	content: [
-		"./components/**/*.{js,vue,ts}",
+		"./components/**/*.vue",
 		"./layouts/**/*.vue",
 		"./pages/**/*.vue",
 		"./plugins/**/*.{js,ts}",
@@ -42,6 +42,7 @@ module.exports = {
 		'grid-rows-2',
 		'grid-rows-3',
 		'grid-rows-4',
+		'cursor-pointer',
 	],
 	theme: {
 		extend: {

@@ -1,5 +1,6 @@
 <template>
 	<div
+			class="cursor-pointer"
 			:class="colorClass"
 			@click="selectSegment"
 	>
