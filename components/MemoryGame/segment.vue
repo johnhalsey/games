@@ -17,6 +17,10 @@ export default {
 		active: {
 			type: Boolean,
 			default: false
+		},
+		index: {
+			type: Number,
+			required: true
 		}
 	},
 	data () {
@@ -27,17 +31,17 @@ export default {
 	computed: {
 		colorClass () {
 			if (this.active || this.selected) {
-				return `bg-${this.colour}-300`
+				return `bg-${this.colour}-400`
 			}
-			return `bg-${this.colour}-600`
+			return `bg-${this.colour}-500`
 		}
 	},
 	methods: {
 		selectSegment () {
 			this.selected = true
-			this.$emit('select-segment')
 			setTimeout(() => {
 				this.selected = false
+				this.$emit('selected', this.index)
 			}, 500)
 		}
 	}

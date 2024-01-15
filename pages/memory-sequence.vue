@@ -15,12 +15,15 @@
 		<div class="grow">
 			<div class="grid h-full grid-cols-2 grid-rows-2"
 					 :class="containerClasses">
-					<memory-game-segment v-for="index in segments"
-															 :key="'segment-' + index"
-															 :colour="colours[index -1]"
-															 :active="activeSegment === index -1">
+				<memory-game-segment v-for="index in segments"
+														 :key="'segment-' + index"
+														 :colour="colours[index -1]"
+														 :active="activeSegment === index -1"
+														 :index="index -1"
+														 @selected="segmentSelected"
+				>
 
-					</memory-game-segment>
+				</memory-game-segment>
 			</div>
 		</div>
 	</div>
@@ -32,7 +35,7 @@ import MemoryGameSegment from '~/components/MemoryGame/segment.vue'
 
 export default {
 	name: "memory-sequence.vue",
- 	components: {
+	components: {
 		MemoryGameSegment
 	},
 	data () {
@@ -57,6 +60,7 @@ export default {
 				'cyan'
 			],
 			sequence: [],
+			userSequence: [],
 			activeSegment: null
 		}
 	},
@@ -97,18 +101,31 @@ export default {
 		randomIntFromInterval (min, max) { // min and max included
 			return Math.floor(Math.random() * (max - min + 1) + min)
 		},
-		play () {
-			this.sequence.forEach((index) => {
-				setTimeout(() => {
-					this.highlight(index)
-				}, (index + 1) * 1000)
-			})
+		async play () {
+			this.userSequence = []
+			for (const index of this.sequence) {
+				await this.highlight(index);
+			}
 		},
 		highlight (index) {
-			this.activeSegment = index
-			setTimeout(() => {
-				this.activeSegment = null
-			}, 500)
+			return new Promise((resolve) => {
+				this.activeSegment = index
+				setTimeout(() => {
+					this.activeSegment = null
+					setTimeout(() => {
+						resolve()
+					}, 300)
+				}, 500)
+			})
+		},
+		segmentSelected (index) {
+			this.userSequence.push(index)
+			if (this.userSequence.length === this.sequence.length) {
+				setTimeout(() => {
+					this.nextTurn()
+				}, 500)
+
+			}
 		}
 	}
 
