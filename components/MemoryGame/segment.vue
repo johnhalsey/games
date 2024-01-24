@@ -8,8 +8,12 @@
 </template>
 
 <script>
+
+import sounds from '~/components/MemoryGame/sounds.vue'
+
 export default {
 	name: "MemoryGameSegment",
+	mixins: [sounds],
 	props: {
 		colour: {
 			type: String,
@@ -33,6 +37,13 @@ export default {
 			selected: false
 		}
 	},
+	watch: {
+		active (val) {
+			if (val) {
+				this.playSound()
+			}
+		}
+	},
 	computed: {
 		colorClass () {
 			if (this.active || this.selected) {
@@ -44,10 +55,15 @@ export default {
 	methods: {
 		selectSegment () {
 			this.selected = true
+			this.playSound()
 			setTimeout(() => {
 				this.selected = false
 				this.$emit('selected', this.index)
 			}, this.timeout)
+		},
+		playSound () {
+			const audio = new Audio(this.sound)
+			audio.play()
 		}
 	}
 }

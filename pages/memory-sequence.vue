@@ -55,7 +55,7 @@ export default {
 		return {
 			highScore: 0,
 			currentScore: 0,
-			currentLevel: 5,
+			currentLevel: 0,
 			difficulties: [
 				{label: 'Easy', segments: 4},
 				{label: 'Medium', segments: 6},
