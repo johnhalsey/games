@@ -28,6 +28,7 @@
 			<div class="grid h-full grid-cols-2 grid-rows-2"
 					 :class="containerClasses">
 				<memory-game-segment v-for="index in segments"
+														 :timeout="timeout"
 														 :key="'segment-' + index"
 														 :colour="colours[index -1]"
 														 :active="activeSegment === index -1"
@@ -54,13 +55,13 @@ export default {
 		return {
 			highScore: 0,
 			currentScore: 0,
-			currentLevel: 1,
+			currentLevel: 5,
 			difficulties: [
 				{label: 'Easy', segments: 4},
 				{label: 'Medium', segments: 6},
 				{label: 'Hard', segments: 9},
 			],
-			currentDifficulty: 'Hard',
+			currentDifficulty: 'Easy',
 			colours: [
 				'green',
 				'blue',
@@ -78,6 +79,22 @@ export default {
 		}
 	},
 	computed: {
+		timeout () {
+			if (this.currentLevel > 20) {
+				return 300
+			}
+			if (this.currentLevel > 15) {
+				return 350
+			}
+			if (this.currentLevel > 10) {
+				return 400
+			}
+			if (this.currentLevel > 5) {
+				return 450
+			}
+
+			return 500
+		},
 		segments () {
 			return this.difficulties.find(difficulty => difficulty.label === this.currentDifficulty).segments;
 		},
@@ -141,8 +158,8 @@ export default {
 					this.activeSegment = null
 					setTimeout(() => {
 						resolve()
-					}, 300)
-				}, 500)
+					}, this.timeout)
+				}, this.timeout)
 			})
 		}
 		,
@@ -166,7 +183,7 @@ export default {
 			if (this.userSequence.length === this.sequence.length) {
 				setTimeout(() => {
 					this.nextTurn(this.currentLevel + 1)
-				}, 500)
+				}, this.timeout)
 
 			}
 		}

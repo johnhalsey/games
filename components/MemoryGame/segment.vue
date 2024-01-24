@@ -22,6 +22,10 @@ export default {
 		index: {
 			type: Number,
 			required: true
+		},
+		timeout: {
+			type: Number,
+			required: true
 		}
 	},
 	data () {
@@ -43,7 +47,7 @@ export default {
 			setTimeout(() => {
 				this.selected = false
 				this.$emit('selected', this.index)
-			}, 500)
+			}, this.timeout)
 		}
 	}
 }
