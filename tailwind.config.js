@@ -8,9 +8,9 @@ module.exports = {
 		'./pages/*.{js,jsx,ts,tsx,vue}',
 	],
 	content: [
-		"./components/**/*.vue",
-		"./layouts/**/*.vue",
-		"./pages/**/*.vue",
+		"./components/**/*.{vue}",
+		"./layouts/**/*.{vue}",
+		"./pages/**/*.{vue}",
 		"./plugins/**/*.{js,ts}",
 		"./app.vue",
 		"./error.vue",

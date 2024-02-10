@@ -1,10 +1,10 @@
 <template>
 	<div class="flex flex-col h-full">
 		<div class="border p-3 bg-slate-200">
-			<ul class="w-full md:w-1/2">
+			<ul class="w-full">
 				<li class="md:inline w-1/3 mr-5">
 					<button class="p-3 bg-blue-200 rounded hover:bg-blue-300"
-									@click="startGame">
+									@click="openStartGameModal">
 						New Game
 					</button>
 				</li>
@@ -39,17 +39,24 @@
 				</memory-game-segment>
 			</div>
 		</div>
+		<start-game-modal
+				:show="modals.startGame"
+				@start-game="startGame"
+				@close="closeStartGameModal"
+		/>
 	</div>
 </template>
 
 <script>
 
 import MemoryGameSegment from '~/components/MemoryGame/segment.vue'
+import StartGameModal from '~/components/MemoryGame/StartGameModal.vue'
 
 export default {
 	name: "memory-sequence.vue",
 	components: {
-		MemoryGameSegment
+		MemoryGameSegment,
+		StartGameModal
 	},
 	data () {
 		return {
@@ -75,7 +82,11 @@ export default {
 			],
 			sequence: [],
 			userSequence: [],
-			activeSegment: null
+			activeSegment: null,
+			modals: {
+				startGame: true,
+				gameOver: false
+			}
 		}
 	},
 	computed: {
@@ -126,6 +137,12 @@ export default {
 				highScore = localStorage.getItem('highScore')
 			}
 			this.highScore = highScore
+		},
+		openStartGameModal () {
+			this.modals.startGame = true
+		},
+		closeStartGameModal () {
+			this.modals.startGame = false
 		},
 		startGame () {
 			this.sequence = []
