@@ -5,7 +5,8 @@ module.exports = {
 	// These paths are just examples, customize them to match your project structure
 	purge: [
 		'./public/**/*.html',
-		'./pages/*.{js,jsx,ts,tsx,vue}',
+		'./pages/**/*.{js,jsx,ts,tsx,vue}',
+		'./components/**/*.{js,jsx,ts,tsx,vue}',
 	],
 	content: [
 		"./components/**/*.{vue}",
