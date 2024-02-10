@@ -5,11 +5,13 @@
 		<div class="modal"
 				 :class="{'show': show}"
 		>
-			<h1 class="text-3xl font-bold mb-4">Memory Sequence</h1>
-			<p class="text-xl mb-4">Remember the sequence of colours and repeat it back.</p>
-			<div class="flex justify-center items-center w-full">
+			<h1 class="text-3xl font-bold mb-4">Memory Sequence 🧠</h1>
+			<p class="text-xl mb-4">Remember the sequence of colours and repeat it back. </p>
+			<p class="text-xl mb-4">Tap on the blocks in the right order to get to the next level. </p>
+		<p class="text-xl mb-4">Good luck 🤞</p>
+			<div class="flex w-full">
 				<button
-						class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
+						class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4 mr-auto"
 						@click="startGame"
 				>
 					Start Game

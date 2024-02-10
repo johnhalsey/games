@@ -26,7 +26,9 @@
 	h-auto
 	bg-white
 	p-8
-	overflow-hidden;
+	overflow-hidden
+	shadow-md
+	shadow-gray-700;
 }
 
 .modal.show {
