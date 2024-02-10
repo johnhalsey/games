@@ -1,11 +1,11 @@
 .modal-background {
 	z-index: -10;
+	transition-property: background-color, z-index;
+	transition-duration: 300ms, 300ms;
 	@apply fixed
 	flex
 	justify-center
 	items-center
-	transition-all
-	duration-300
 	bg-black
 	bg-opacity-60
 	w-dvw
@@ -14,23 +14,23 @@
 
 .modal-background.show {
 	z-index: 9998;
-	@apply top-0 right-0 bottom-0 left-0 transition-all duration-300 z-10;
+	@apply top-0 right-0 bottom-0 left-0;
 }
 
 .modal {
 	max-height: 90%;
 	z-index: -10;
-	@apply w-0
-	h-0
+	transition-property: overflow, z-index;
+	transition-duration: 300ms, 300ms;
+	@apply w-6/12
+	h-auto
 	bg-white
-		p-8
+	p-8
 	overflow-hidden;
 }
 
 .modal.show {
 	z-index: 9999;
-	@apply w-6/12
-	h-auto
-	overflow-auto;
+	@apply overflow-auto;
 }
 
