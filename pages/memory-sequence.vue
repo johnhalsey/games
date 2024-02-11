@@ -1,13 +1,15 @@
 <template>
 	<div class="bg-white flex flex-col h-full">
-		<div class="p-3 flex">
+		<div class="p-3 md:flex">
 
-			<button class="p-3 mr-5 border border-green-500"
+				<div class="flex">
+
+			<button class="w-6/12 md:w-auto p-3 mr-5 border border-green-500"
 							@click="openStartGameModal">
 				New Game
 			</button>
 
-			<select class="p-3 mr-5 w-26 border border-green-500"
+			<select class="w-6/12 md:w-auto p-3 md:mr-5 w-26 border border-green-500"
 							v-model="currentDifficulty">
 				<option v-for="difficulty in difficulties"
 								:key="difficulty.label"
@@ -15,8 +17,9 @@
 					{{ difficulty.label }}
 				</option>
 			</select>
+		</div>
 
-			<div class="ml-auto mr-5 h-full flex items-center">
+			<div class="p-3 mt-3 md:p-0 md:mt-0 md:ml-auto mr-5 flex items-center">
 				<div class="mr-5">Current Score: {{ currentScore }}</div>
 				<div class="mr-5">High Score: {{ highScore }}</div>
 				<div>Level: {{ currentLevel }}</div>
