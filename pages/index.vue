@@ -1,14 +1,17 @@
 <template>
-	<div>
-		<NuxtLink to="/memory-sequence">
-			Memory Game
-		</NuxtLink>
-	</div>
+<!--	<div>-->
+<!--		<NuxtLink to="/memory-sequence">-->
+<!--			Memory Game-->
+<!--		</NuxtLink>-->
+<!--	</div>-->
 </template>
 
 <script>
 export default {
-	name: "HomePage"
+	name: "HomePage",
+ created() {
+		this.$router.push('/memory-sequence')
+	}
 }
 </script>
 

@@ -1,28 +1,27 @@
 <template>
-	<div class="flex flex-col h-full">
-		<div class="border p-3 bg-slate-200">
-			<ul class="w-full">
-				<li class="md:inline w-1/3 mr-5">
-					<button class="p-3 bg-blue-200 rounded hover:bg-blue-300"
-									@click="openStartGameModal">
-						New Game
-					</button>
-				</li>
-				<li class="md:inline mr-5">
-					<select class="p-3 bg-blue-200 rounded w-26 hover:bg-blue-300"
-									v-model="currentDifficulty">
-						<option v-for="difficulty in difficulties"
-										:key="difficulty.label"
-										:value="difficulty.label">
-							{{ difficulty.label }}
-						</option>
-					</select>
-				</li>
-				<li class="md:inline mr-5 ">Current Score: {{ currentScore }}</li>
-				<li class="md:inline mr-5 ">High Score: {{ highScore }}</li>
-				<li class="md:inline mr-5">Level: {{ currentLevel }}</li>
+	<div class="bg-white flex flex-col h-full">
+		<div class="p-3 flex">
 
-			</ul>
+			<button class="p-3 mr-5 border border-green-500"
+							@click="openStartGameModal">
+				New Game
+			</button>
+
+			<select class="p-3 mr-5 w-26 border border-green-500"
+							v-model="currentDifficulty">
+				<option v-for="difficulty in difficulties"
+								:key="difficulty.label"
+								:value="difficulty.label">
+					{{ difficulty.label }}
+				</option>
+			</select>
+
+			<div class="ml-auto mr-5 h-full flex items-center">
+				<div class="mr-5">Current Score: {{ currentScore }}</div>
+				<div class="mr-5">High Score: {{ highScore }}</div>
+				<div>Level: {{ currentLevel }}</div>
+			</div>
+
 		</div>
 		<div class="grow">
 			<div class="grid h-full grid-cols-2 grid-rows-2"
@@ -42,7 +41,13 @@
 		<start-game-modal
 				:show="modals.startGame"
 				@start-game="startGame"
-				@close="closeStartGameModal"
+				@close="closeModals"
+		/>
+		<end-game-modal
+				:show="modals.gameOver"
+				:score="currentScore"
+				@start-game="startGame"
+				@close="closeModals"
 		/>
 	</div>
 </template>
@@ -51,12 +56,14 @@
 
 import MemoryGameSegment from '~/components/MemoryGame/segment.vue'
 import StartGameModal from '~/components/MemoryGame/StartGameModal.vue'
+import EndGameModal from "../components/MemoryGame/EndGameModal.vue"
 
 export default {
 	name: "memory-sequence.vue",
 	components: {
 		MemoryGameSegment,
-		StartGameModal
+		StartGameModal,
+		EndGameModal
 	},
 	data () {
 		return {
@@ -84,8 +91,8 @@ export default {
 			userSequence: [],
 			activeSegment: null,
 			modals: {
-				startGame: true,
-				gameOver: false
+				startGame: false,
+				gameOver: true
 			}
 		}
 	},
@@ -141,12 +148,17 @@ export default {
 		openStartGameModal () {
 			this.modals.startGame = true
 		},
-		closeStartGameModal () {
+		closeModals () {
 			this.modals.startGame = false
+			this.modals.gameOver = false
 		},
 		startGame () {
+			this.modals.startGame = false
 			this.sequence = []
-			this.nextTurn()
+			// sleep for 1 second
+			setTimeout(() => {
+				this.nextTurn()
+			}, 800)
 		}
 		,
 		nextTurn (level = 1) {
@@ -190,7 +202,7 @@ export default {
 					// save the high score to local storage
 					localStorage.setItem('highScore', this.currentScore)
 				}
-				alert('Game Over')
+				this.modals.gameOver = true
 
 				return;
 			} else {
