@@ -2,22 +2,22 @@
 	<div class="bg-white flex flex-col h-full">
 		<div class="p-3 md:flex">
 
-				<div class="flex">
+			<div class="flex">
 
-			<button class="w-6/12 md:w-auto p-3 mr-5 border border-green-500"
-							@click="openStartGameModal">
-				New Game
-			</button>
+				<button class="w-6/12 md:w-auto p-3 mr-5 border border-green-500"
+								@click="openStartGameModal">
+					New Game
+				</button>
 
-			<select class="w-6/12 md:w-auto p-3 md:mr-5 w-26 border border-green-500"
-							v-model="currentDifficulty">
-				<option v-for="difficulty in difficulties"
-								:key="difficulty.label"
-								:value="difficulty.label">
-					{{ difficulty.label }}
-				</option>
-			</select>
-		</div>
+				<select class="w-6/12 md:w-auto p-3 md:mr-5 w-26 border border-green-500"
+								v-model="currentDifficulty">
+					<option v-for="difficulty in difficulties"
+									:key="difficulty.label"
+									:value="difficulty.label">
+						{{ difficulty.label }}
+					</option>
+				</select>
+			</div>
 
 			<div class="p-3 mt-3 md:p-0 md:mt-0 md:ml-auto mr-5 flex items-center">
 				<div class="mr-5">Current Score: {{ currentScore }}</div>
@@ -158,6 +158,7 @@ export default {
 		startGame () {
 			this.modals.startGame = false
 			this.sequence = []
+			this.currentScore = 0
 			// sleep for 1 second
 			setTimeout(() => {
 				this.nextTurn()

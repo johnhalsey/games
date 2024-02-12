@@ -8,7 +8,7 @@
 		>
 			<div class="modal-header flex">
 				<h1 class="text-3xl font-bold mb-4 mr-auto">Game Over 🏁</h1>
-				<div class="flex-shrink text-2xl" @click="close()">⛌</div>
+				<div class="flex-shrink text-2xl cursor-pointer" @click="close()">⛌</div>
 			</div>
 
 			<p class="text-xl mb-4" v-show="newHighScore">You set a new High Score!</p>
