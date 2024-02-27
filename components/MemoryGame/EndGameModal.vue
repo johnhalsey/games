@@ -12,13 +12,15 @@
 			</div>
 
 			<p class="text-xl mb-4" v-show="newHighScore">You set a new High Score!</p>
-			<p class="text-xl mb-4">You remembered {{score}} sequencies, why not try a harder setting?</p>
-			<div class="flex w-full">
-				<button
-						class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-full sm:w-auto"
-						@click="startGame"
+			<p class="text-xl mb-4">You remembered {{ score }} sequencies, why not try a harder setting?</p>
+			<div class="sm:flex w-full">
+				<button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-full w-auto"
+								@click="share"
 				>
-					Try again
+					<div class="flex items-center">
+						<span class="mr-5">Share</span>
+						<font-awesome-icon icon="fa-solid fa-share-nodes"/>
+					</div>
 				</button>
 			</div>
 		</div>
@@ -34,15 +36,15 @@ export default {
 			type: Boolean,
 			default: false
 		},
-	 	score: {
+		score: {
 			type: Number,
 		}
 	},
- computed: {
+	computed: {
 		newHighScore () {
 			return this.score > localStorage.getItem('highScore')
 		}
- },
+	},
 	methods: {
 		startGame () {
 			this.$emit('start-game')
@@ -52,9 +54,30 @@ export default {
 		},
 		clickOff () {
 			// if mouse cursor is clicked outside of the modal
+		 console.log(event.target)
 			if (!event.target.classList.contains('modal')) {
 				this.close()
 			}
+		},
+		share () {
+			if (navigator.userAgentData.mobile) {
+				console.log('using a mobile')
+				this.shareOnMobile()
+			} else {
+				this.shareOnDesktop()
+				console.log('not using a mobile')
+			}
+		},
+		shareOnMobile () {
+			navigator.share({
+				title: 'Your title',
+				text: 'Your text',
+				url: 'Your url to share'
+			})
+		},
+		shareOnDesktop () {
+			navigator.clipboard.writeText('I remembered ' + this.score + ' sequences');
+
 		}
 	}
 }
