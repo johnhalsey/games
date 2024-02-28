@@ -49,6 +49,8 @@
 		<end-game-modal
 				:show="modals.gameOver"
 				:score="currentScore"
+				:level="currentLevel"
+				:difficulty="currentDifficulty"
 				@start-game="startGame"
 				@close="closeModals"
 		/>
@@ -95,7 +97,7 @@ export default {
 			activeSegment: null,
 			modals: {
 				startGame: false,
-				gameOver: true
+				gameOver: false
 			}
 		}
 	},

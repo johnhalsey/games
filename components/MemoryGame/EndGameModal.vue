@@ -12,9 +12,10 @@
 			</div>
 
 			<p class="text-xl mb-4" v-show="newHighScore">You set a new High Score!</p>
-			<p class="text-xl mb-4">You remembered {{ score }} sequencies, why not try a harder setting?</p>
-			<div class="sm:flex w-full">
-				<button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-full w-auto"
+			<p class="text-xl mb-4">You remembered {{ score }} sequencies, and got to level {{ level }}</p>
+			<p class="text-xl mb-4" v-show="difficulty == 'Easy' || difficulty == 'Medium'">Why not try a harder setting?</p>
+			<div class="sm:flex w-full sm:w-auto">
+				<button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-full sm:w-auto"
 								@click="share"
 				>
 					<div class="flex items-center">
@@ -38,6 +39,12 @@ export default {
 		},
 		score: {
 			type: Number,
+		},
+		level: {
+			type: Number
+		},
+		difficulty: {
+			type: String
 		}
 	},
 	computed: {
@@ -54,30 +61,36 @@ export default {
 		},
 		clickOff () {
 			// if mouse cursor is clicked outside of the modal
-		 console.log(event.target)
+			console.log(event.target)
 			if (!event.target.classList.contains('modal')) {
 				this.close()
 			}
 		},
 		share () {
 			if (navigator.userAgentData.mobile) {
-				console.log('using a mobile')
 				this.shareOnMobile()
 			} else {
 				this.shareOnDesktop()
-				console.log('not using a mobile')
 			}
 		},
 		shareOnMobile () {
 			navigator.share({
-				title: 'Your title',
-				text: 'Your text',
-				url: 'Your url to share'
+				text: this.buildMessage(),
+				url: window.location.href
 			})
 		},
 		shareOnDesktop () {
-			navigator.clipboard.writeText('I remembered ' + this.score + ' sequences');
-
+			navigator.clipboard.writeText(this.buildMessage());
+		},
+		buildMessage () {
+			let message = '🟩🟧\n🟦🟨\n'
+			message += 'Memory Sequence 🧠'
+			message += '\nScore: ' + this.score
+			if (this.newHighScore) {
+				message += ' (New highscore!) 😎'
+			}
+			message += '\nLevel: ' + this.level
+			return message += '\nDifficulty: ' + this.difficulty
 		}
 	}
 }
