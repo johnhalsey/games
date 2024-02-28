@@ -1,7 +1,6 @@
 <template>
 	<div class="modal-background"
 			 :class="{'show': show}"
-			 @click="clickOff()"
 	>
 		<div class="modal"
 				 :class="{'show': show}"
@@ -14,7 +13,7 @@
 			<p class="text-xl mb-4" v-show="newHighScore">You set a new High Score!</p>
 			<p class="text-xl mb-4">You remembered {{ score }} sequencies, and got to level {{ level }}</p>
 			<p class="text-xl mb-4" v-show="difficulty == 'Easy' || difficulty == 'Medium'">Why not try a harder setting?</p>
-			<div class="sm:flex w-full sm:w-auto">
+			<div class="sm:flex w-full sm:w-auto sm:items-center">
 				<button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-full sm:w-auto"
 								@click="share"
 				>
@@ -23,6 +22,7 @@
 						<font-awesome-icon icon="fa-solid fa-share-nodes"/>
 					</div>
 				</button>
+				<div v-show="statsCopied" class="ml-5 text-green-700">Stats have been copied to the clipboard</div>
 			</div>
 		</div>
 	</div>
@@ -47,6 +47,11 @@ export default {
 			type: String
 		}
 	},
+	data () {
+		return {
+			statsCopied: false
+		}
+	},
 	computed: {
 		newHighScore () {
 			return this.score > localStorage.getItem('highScore')
@@ -57,6 +62,7 @@ export default {
 			this.$emit('start-game')
 		},
 		close () {
+			this.statsCopied = false
 			this.$emit('close')
 		},
 		clickOff () {
@@ -81,6 +87,7 @@ export default {
 		},
 		shareOnDesktop () {
 			navigator.clipboard.writeText(this.buildMessage());
+			this.statsCopied = true
 		},
 		buildMessage () {
 			let message = '🟩🟧\n🟦🟨\n'
