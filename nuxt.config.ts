@@ -8,6 +8,9 @@ export default defineNuxtConfig({
 		'~/assets/css/main.css',
 		'@fortawesome/fontawesome-svg-core/styles.css'
 	],
+	server: {
+		port: 8000 // default: 3000
+	},
 	build: {
 		transpile: [
 			'@fortawesome/vue-fontawesome',
