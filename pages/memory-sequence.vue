@@ -104,19 +104,19 @@ export default {
 	computed: {
 		timeout () {
 			if (this.currentLevel > 20) {
-				return 300
+				return 150
 			}
 			if (this.currentLevel > 15) {
-				return 350
+				return 200
 			}
 			if (this.currentLevel > 10) {
-				return 400
+				return 250
 			}
 			if (this.currentLevel > 5) {
-				return 450
+				return 300
 			}
 
-			return 500
+			return 350
 		},
 		segments () {
 			return this.difficulties.find(difficulty => difficulty.label === this.currentDifficulty).segments;
