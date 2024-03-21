@@ -9,9 +9,7 @@
 <script>
 export default {
 	name: "HomePage",
- created() {
-		this.$router.push('/memory-sequence')
-	}
+
 }
 </script>
 
