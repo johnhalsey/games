@@ -67,7 +67,6 @@ export default {
 		},
 		clickOff () {
 			// if mouse cursor is clicked outside of the modal
-			console.log(event.target)
 			if (!event.target.classList.contains('modal')) {
 				this.close()
 			}

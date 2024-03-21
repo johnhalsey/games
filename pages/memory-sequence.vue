@@ -221,7 +221,7 @@ export default {
 			if (this.userSequence.length === this.sequence.length) {
 				setTimeout(() => {
 					this.nextTurn(this.currentLevel + 1)
-				}, this.timeout)
+				}, 1000)
 
 			}
 		}
