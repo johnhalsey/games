@@ -35,6 +35,7 @@
 														 :colour="colours[index -1]"
 														 :active="activeSegment === index -1"
 														 :index="index -1"
+														 :sound="getSound(index)"
 														 @selected="segmentSelected"
 				>
 
@@ -62,6 +63,7 @@
 import MemoryGameSegment from '~/components/MemoryGame/segment.vue'
 import StartGameModal from '~/components/MemoryGame/StartGameModal.vue'
 import EndGameModal from "../components/MemoryGame/EndGameModal.vue"
+import sounds from "../components/MemoryGame/sounds.vue"
 
 export default {
 	name: "memory-sequence.vue",
@@ -70,6 +72,7 @@ export default {
 		StartGameModal,
 		EndGameModal
 	},
+ mixins: [sounds],
 	data () {
 		return {
 			highScore: 0,

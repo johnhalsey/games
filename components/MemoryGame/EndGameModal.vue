@@ -73,7 +73,7 @@ export default {
 			}
 		},
 		share () {
-			if (navigator.userAgentData.mobile) {
+			if (navigator.share) {
 				this.shareOnMobile()
 			} else {
 				this.shareOnDesktop()

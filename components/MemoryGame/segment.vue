@@ -9,11 +9,8 @@
 
 <script>
 
-import sounds from '~/components/MemoryGame/sounds.vue'
-
 export default {
 	name: "MemoryGameSegment",
-	mixins: [sounds],
 	props: {
 		colour: {
 			type: String,
@@ -30,6 +27,9 @@ export default {
 		timeout: {
 			type: Number,
 			required: true
+		},
+		sound: {
+			type: File
 		}
 	},
 	data () {

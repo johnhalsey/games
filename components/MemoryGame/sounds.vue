@@ -25,6 +25,19 @@ export default {
 			if (this.index === 7) return sound7
 			if (this.index === 8) return sound8
 		}
+	},
+	methods: {
+		getSound (index) {
+			if (index === 0) return sound0
+			if (index === 1) return sound1
+			if (index === 2) return sound2
+			if (index === 3) return sound3
+			if (index === 4) return sound4
+			if (index === 5) return sound5
+			if (index === 6) return sound6
+			if (index === 7) return sound7
+			if (index === 8) return sound8
+		}
 	}
 
 
