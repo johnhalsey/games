@@ -168,27 +168,23 @@ export default {
 			setTimeout(() => {
 				this.nextTurn()
 			}, 800)
-		}
-		,
+		},
 		nextTurn (level = 1) {
 			const segments = this.difficulties.find(difficulty => difficulty.label === this.currentDifficulty).segments;
 			const index = this.randomIntFromInterval(0, segments - 1)
 			this.sequence.push(index)
 			this.play(level)
-		}
-		,
+		},
 		randomIntFromInterval (min, max) { // min and max included
 			return Math.floor(Math.random() * (max - min + 1) + min)
-		}
-		,
+		},
 		async play (level) {
 			this.currentLevel = level
 			this.userSequence = []
 			for (const index of this.sequence) {
 				await this.highlight(index);
 			}
-		}
-		,
+		},
 		highlight (index) {
 			return new Promise((resolve) => {
 				this.activeSegment = index
@@ -199,8 +195,7 @@ export default {
 					}, this.timeout)
 				}, this.timeout)
 			})
-		}
-		,
+		},
 		segmentSelected (index) {
 			this.userSequence.push(index)
 			// check if the user has selected the correct sequence
