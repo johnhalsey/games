@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Games
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Repository that holds games written entirely in Javascript (Vue/Nuxt).
 
 ## Setup
 
